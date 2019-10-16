@@ -1,0 +1,15 @@
+[Unit]
+Description=serveo
+After=network.target
+
+[Service]
+ExecStart=ssh -o "ServerAliveInterval 30" -R ${EXTERNAL_PORT}:localhost:${INTERNAL_PORT} serveo.net
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=serveo
+TimeoutSec=60
+RestartSec=60
+
+[Install]
+WantedBy=multi-user.target
